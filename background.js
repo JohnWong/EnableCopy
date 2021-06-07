@@ -48,6 +48,9 @@ function needEnableCopy(url) {
 
 chrome.tabs.onSelectionChanged.addListener(function(tabId, selectInfo) {
 	chrome.tabs.get(tabId, function(tab) {
+		if (!tab || !tab.url) {
+			return;
+		}
 		chrome.browserAction.setIcon({
 			path: needEnableCopy(tab.url) ? 'icon19.png' : 'icon19-disable.png',
 			tabId: tabId
